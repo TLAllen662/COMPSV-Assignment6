@@ -42,8 +42,8 @@ TeamTree()
 **Methods**
 
 `insert(manager_name: str, employee_name: str, side: str) -> None`
-- Recursively searches for manager_name.
-- Adds employee_name as the left or right child based on the side argument.
+- Recursively searches for `manager_name`.
+- Adds `employee_name` as the `left` or `right` child based on the side argument.
 - Prints a helpful success or error message.
 
 `print_tree(node: EmployeeNode or None = None, level: int = 0) -> None`
