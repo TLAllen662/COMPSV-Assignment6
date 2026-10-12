@@ -119,3 +119,38 @@ def company_directory():
             break
         else:
             print("❌ Invalid option. Try again.")
+
+'''
+Design Memo: Building the Team Management Tree
+
+Recursive insertion in this project works by walking the tree one node at a
+time, starting at the root. The `insert()` method checks whether the current
+node's name matches the target manager. If it does, the new employee is
+attached as a left or right child, provided that side is open. If it doesn't
+match, the method calls itself on the current node's left child and then,
+if the employee still hasn't been placed, on the right child. Each recursive
+call narrows the search until the manager is found or the tree is exhausted,
+at which point only the outermost call reports a "manager not found" error,
+since the deeper calls can't tell whether a sibling branch already succeeded.
+
+The trickiest part was making sure the search didn't print duplicate error
+messages every time a recursive call didn't find the manager in its own
+subtree, since a failed search in the left branch is not necessarily a
+failure overall if the right branch succeeds. I solved this by having every
+recursive call return a boolean indicating whether the manager was located
+anywhere in its subtree, and only letting the top-level call decide whether
+to print the final "not found" message. I also had to be careful to check
+whether a side was already occupied before overwriting it, and to validate
+that the side argument was actually "left" or "right" so bad input didn't
+silently corrupt the tree.
+
+Trees are preferable to flat lists or tables whenever data has a natural
+hierarchy and you need fast, structured traversal, like org charts, file
+systems, decision trees, or routing tables. Unlike a flat list, a tree lets
+you model parent-child relationships directly, so operations like "find all
+of this manager's reports" or "print the whole structure" are simple
+recursive traversals instead of manual filtering. Balanced trees also offer
+faster lookup than a list once the data set grows large, and the recursive
+structure naturally mirrors how real organizations and file systems are
+already structured, making the code easier to reason about and extend.
+'''
