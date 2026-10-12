@@ -7,8 +7,10 @@ class EmployeeNode:
         right (EmployeeNode): The right child node, representing the right subordinate.
     '''
 
-    # Delete this line and implement the class below
-    pass
+    def __init__(self, name):
+        self.name = name
+        self.left = None
+        self.right = None
 
 class TeamTree:
     '''
