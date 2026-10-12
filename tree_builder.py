@@ -26,6 +26,39 @@ class TeamTree:
     def __init__(self):
         self.root = None
 
+    def insert(self, manager_name, employee_name, side, current_node=None):
+        is_top_call = current_node is None
+        if current_node is None:
+            current_node = self.root
+            if current_node is None:
+                print("❌ Error: The team tree is empty. Add a team lead first.")
+                return False
+
+        if current_node.name == manager_name:
+            side = side.lower()
+            if side not in ("left", "right"):
+                print(f"❌ Error: '{side}' is not a valid side. Choose 'left' or 'right'.")
+                return True
+
+            if getattr(current_node, side) is not None:
+                print(f"⚠️ Error: {manager_name} already has someone on the {side}.")
+                return True
+
+            setattr(current_node, side, EmployeeNode(employee_name))
+            print(f"✅ {employee_name} added under {manager_name} on the {side}.")
+            return True
+
+        found = False
+        if current_node.left is not None:
+            found = self.insert(manager_name, employee_name, side, current_node.left)
+        if not found and current_node.right is not None:
+            found = self.insert(manager_name, employee_name, side, current_node.right)
+
+        if is_top_call and not found:
+            print(f"❌ Error: Manager '{manager_name}' not found in the team tree.")
+
+        return found
+
 # Test your code here
 
 
