@@ -22,9 +22,9 @@ class TeamTree:
         print_tree(node=None, level=0): Prints the tree structure starting from the given node.
 
     '''
-    
-    # Delete this line and implement the class below
-    pass
+
+    def __init__(self):
+        self.root = None
 
 # Test your code here
 
